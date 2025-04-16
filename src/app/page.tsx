@@ -1,9 +1,22 @@
 'use client';
 
 import {useEffect, useState} from 'react';
-import {MapContainer, Marker, Popup, TileLayer} from 'react-leaflet';
+import dynamic from 'next/dynamic';
 import 'leaflet/dist/leaflet.css';
-import {Icon} from 'leaflet';
+
+const MapContainer = dynamic(
+  () => import('react-leaflet').then(mod => mod.MapContainer),
+  {
+    ssr: false,
+  }
+);
+
+const TileLayer = dynamic(
+  () => import('react-leaflet').then(mod => mod.TileLayer),
+  {
+    ssr: false,
+  }
+);
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
@@ -15,6 +28,29 @@ import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert';
 import {ExclamationTriangleIcon} from '@radix-ui/react-icons';
 import {useToast} from '@/hooks/use-toast';
 import {Toaster} from '@/components/ui/toaster';
+
+const Marker = dynamic(
+  () => import('react-leaflet').then(mod => mod.Marker),
+  {
+    ssr: false,
+  }
+);
+
+const Icon = dynamic(
+  async () => {
+    const leaflet = await import('leaflet');
+    return () => null; // Return a functional component that renders nothing
+  },
+  { ssr: false }
+);
+
+
+const Popup = dynamic(
+  () => import('react-leaflet').then(mod => mod.Popup),
+  {
+    ssr: false,
+  }
+);
 
 const customIcon = new Icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/128/9667/9667298.png',
@@ -110,6 +146,12 @@ export default function Home() {
     });
   };
 
+  const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
+
+  const handlePersonaChange = (persona: string) => {
+    setSelectedPersona(persona);
+  };
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-background">
       <Toaster />
@@ -117,25 +159,66 @@ export default function Home() {
       <div className="w-full md:w-1/2 p-4">
         <Card className="mb-4">
           <CardHeader>
-            <CardTitle>Explore Destinations</CardTitle>
-            <CardDescription>Discover your next adventure</CardDescription>
+            <CardTitle>Explore Sardinia</CardTitle>
+            <CardDescription>Find your perfect Sardinian adventure</CardDescription>
           </CardHeader>
           <CardContent>
+            <div className="mb-4">
+              <h4 className="text-lg font-semibold mb-2">Select Your Travel Persona</h4>
+              <div className="flex space-x-4">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="persona"
+                    value="foodie"
+                    checked={selectedPersona === 'foodie'}
+                    onChange={() => handlePersonaChange('foodie')}
+                    className="h-4 w-4"
+                  />
+                  <span>Foodie</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="persona"
+                    value="adventurer"
+                    checked={selectedPersona === 'adventurer'}
+                    onChange={() => handlePersonaChange('adventurer')}
+                    className="h-4 w-4"
+                  />
+                  <span>Adventurer</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="persona"
+                    value="relaxer"
+                    checked={selectedPersona === 'relaxer'}
+                    onChange={() => handlePersonaChange('relaxer')}
+                    className="h-4 w-4"
+                  />
+                  <span>Relaxer</span>
+                </label>
+              </div>
+              {selectedPersona && (
+                <p className="mt-2">You selected: {selectedPersona}</p>
+              )}
+            </div>
             <MapContainer
-              center={[20, 0]}
-              zoom={2}
-              style={{height: '300px', width: '100%', marginBottom: '1rem'}}
+              center={[40, 9]}
+              zoom={7}
+              style={{height: '400px', width: '100%', marginBottom: '1rem'}}
             >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap contributors"
               />
-              {recommendations.map((city, index) => (
+              {/* recommendations.map((city, index) => (
                 <Marker
                   key={index}
                   position={[40 + index * 2, -10 - index * 3]}
                   icon={customIcon}
-                >
+                  >
                   <Popup>
                     <div className="text-center">
                       <h3 className="font-bold">{city}</h3>
@@ -148,7 +231,7 @@ export default function Home() {
                     </div>
                   </Popup>
                 </Marker>
-              ))}
+              )) */}
             </MapContainer>
 
             {/* Travel Preferences Input */}
