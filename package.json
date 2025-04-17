@@ -11,7 +11,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "fix": "npm run lint -- --fix && npm run typecheck",
-    "prepare": "husky install",
+    "prepare": "simple-git-hooks",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "patch-package"
   },
@@ -57,7 +57,7 @@
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
-    "react-leaflet": "*",
+    "react-leaflet": "^4.2.1",
     "recharts": "^2.15.1",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
@@ -69,10 +69,10 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "genkit-cli": "^1.0.4",
-    "husky": "^9.1.7",
     "lint-staged": "^15.5.1",
     "postcss": "^8",
     "prettier": "^3.5.3",
+    "simple-git-hooks": "^2.12.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
@@ -84,5 +84,8 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
   }
 }

@@ -1,0 +1,9 @@
+id,location_id,name,description,duration_hours,price_eur,difficulty_level,best_season
+1,1,"Beach Volleyball","Play volleyball on the beautiful Poetto Beach",2,0,"easy","summer"
+2,1,"Windsurfing","Learn windsurfing with professional instructors",3,75,"intermediate","spring"
+3,2,"Yacht Tour","Luxury yacht tour along Costa Smeralda",6,250,"easy","summer"
+4,2,"Scuba Diving","Explore underwater marine life",4,120,"intermediate","summer"
+5,3,"Cave Exploration","Guided tour of Neptune's Grotto",1.5,15,"easy","all_year"
+6,4,"Snorkeling","Snorkel in crystal clear waters",2,30,"easy","summer"
+7,5,"Island Hopping","Visit multiple islands in the archipelago",8,150,"easy","summer"
+8,5,"Kayaking","Kayak between the islands",4,80,"intermediate","spring" 

@@ -1,0 +1,6 @@
+id,name,address,latitude,longitude,description,type
+1,"Poetto Beach","Lungomare Poetto, Cagliari, Sardinia",39.1897,9.1628,"Beautiful 8km long beach with white sand and crystal clear water","beach"
+2,"Costa Smeralda","Porto Cervo, Sardinia",41.1359,9.5370,"Luxurious coastal area with emerald waters","coastal_area"
+3,"Neptune's Grotto","Alghero, Sardinia",40.5604,8.1661,"Stunning stalactite cave by the sea","cave"
+4,"La Pelosa Beach","Stintino, Sardinia",40.9643,8.2282,"Iconic beach with shallow turquoise waters","beach"
+5,"Maddalena Archipelago","La Maddalena, Sardinia",41.2126,9.4006,"Beautiful group of islands with pristine beaches","island_group" 
